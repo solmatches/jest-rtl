@@ -21,7 +21,8 @@ function App() {
 			</button>
 			<input
 				type="checkbox"
-				checked={disabled}
+				defaultChecked={disabled}
+				aria-checked={disabled}
 				onChange={handleButtonDisabled}
 			/>
 		</div>
