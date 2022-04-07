@@ -5,12 +5,17 @@ export function replaceCamelWithSpaces(colorName) {
 	return colorName.replace(capitalLetterReg, " $1");
 }
 
-const initialColor = "red";
+export const colors = {
+	initial: "MediumVioletRed",
+	changed: "MidnightBlue",
+  disabled: "gray"
+};
 
 function App() {
 	const [disabled, setDisabled] = useState(false);
-	const [buttonColor, setButtonColor] = useState(initialColor);
-	const newButtonColor = buttonColor === initialColor ? "blue" : initialColor;
+	const [buttonColor, setButtonColor] = useState(colors.initial);
+	const newButtonColor =
+		buttonColor === colors.initial ? colors.changed : colors.initial;
 
 	const handleButtonDisabled = (event) => {
 		setDisabled(event.target.checked);
