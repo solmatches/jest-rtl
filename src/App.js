@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+export function replaceCamelWithSpaces(colorName) {
+  
+}
+
 const initialColor = "red";
 
 function App() {
