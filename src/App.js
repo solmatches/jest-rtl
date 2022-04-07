@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 export function replaceCamelWithSpaces(colorName) {
-  
+	const capitalLetterReg = /\B([A-Z])\B/g;
+	return colorName.replace(capitalLetterReg, " $1");
 }
 
 const initialColor = "red";
