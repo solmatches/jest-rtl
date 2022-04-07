@@ -7,21 +7,23 @@ test("button has correct initial color", () => {
 	render(<App />);
 
 	const colorButton = screen.getByRole("button", {
-		name: `Change to ${colors.changed}`,
+		name: `Change to ${replaceCamelWithSpaces(colors.changed)}`,
 	});
 	expect(colorButton).toHaveStyle({ backgroundColor: colors.initial });
 
 	fireEvent.click(colorButton);
 	expect(colorButton).toHaveStyle({ backgroundColor: colors.changed });
 
-	expect(colorButton.textContent).toBe(`Change to ${colors.initial}`);
+	expect(colorButton.textContent).toBe(
+		`Change to ${replaceCamelWithSpaces(colors.initial)}`
+	);
 });
 
 test("initial conditions", () => {
 	render(<App />);
 
 	const colorButton = screen.getByRole("button", {
-		name: `Change to ${colors.changed}`,
+		name: `Change to ${replaceCamelWithSpaces(colors.changed)}`,
 	});
 
 	expect(colorButton).toBeEnabled();
@@ -38,7 +40,7 @@ test("Checkbox disables button on first click and enables on second click", () =
 
 	const checkbox = screen.getByRole("checkbox", { name: "Disable button" });
 	const colorButton = screen.getByRole("button", {
-		name: `Change to ${colors.changed}`,
+		name: `Change to ${replaceCamelWithSpaces(colors.changed)}`,
 	});
 
 	fireEvent.click(checkbox);
@@ -53,7 +55,7 @@ test("버튼이 비활성화되면 회색이되고 활성화되면 붉은색으�
 
 	const checkbox = screen.getByRole("checkbox", { name: "Disable button" });
 	const colorButton = screen.getByRole("button", {
-		name: `Change to ${colors.changed}`,
+		name: `Change to ${replaceCamelWithSpaces(colors.changed)}`,
 	});
 	const user = userEvent.setup();
 
@@ -71,7 +73,7 @@ test("버튼이 비활성화되면 회색이되고 활성화되면 파란색으�
 
 	const checkbox = screen.getByRole("checkbox", { name: "Disable button" });
 	const colorButton = screen.getByRole("button", {
-		name: `Change to ${colors.changed}`,
+		name: `Change to ${replaceCamelWithSpaces(colors.changed)}`,
 	});
 	const user = userEvent.setup();
 
