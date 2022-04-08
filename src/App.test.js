@@ -14,7 +14,7 @@ test("button has correct initial color", () => {
 	fireEvent.click(colorButton);
 	expect(colorButton).toHaveStyle({ backgroundColor: colors.changed });
 
-	expect(colorButton.textContent).toBe(
+	expect(colorButton).toHaveTextContent(
 		`Change to ${replaceCamelWithSpaces(colors.initial)}`
 	);
 });
