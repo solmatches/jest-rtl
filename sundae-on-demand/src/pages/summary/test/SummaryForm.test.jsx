@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import SummaryForm from "../SummaryForm";
 
@@ -55,8 +55,13 @@ describe("Popover", () => {
 
 		// mouseout을 하면 popover가 사라짐.
 		await user.unhover(termsAndConditions);
+
 		const nullPopoverAgain =
 			screen.queryByText(/아이스크림이 배달되지 않습니다./);
-		expect(nullPopoverAgain).not.toBeInTheDocument();
+
+		// -- popover가 사라질 때까지 기다림
+		await waitFor(() => {
+			expect(nullPopoverAgain).not.toBeInTheDocument();
+		});
 	});
 });
