@@ -34,3 +34,29 @@ describe("Summary Form", () => {
 		expect(button).toBeDisabled();
 	});
 });
+
+describe("Popover", () => {
+	test("hover하면 popover가 응답한다.", async () => {
+		render(<SummaryForm />);
+
+		// 시작할 때는 popover 숨김.
+		// -- 화면에 없는 요소를 선택할 때는 'query'를 사용한다
+		const nullPopover =
+			screen.queryByText(/아이스크림이 배달되지 않습니다./);
+		expect(nullPopover).not.toBeInTheDocument();
+
+		// checkbox label에 mouseover를 할 때 popover가 나타남.
+		const termsAndConditions = screen.getByText(/terms and conditions/i);
+		const user = userEvent.setup();
+
+		await user.hover(termsAndConditions);
+		const popover = screen.getByText(/아이스크림이 배달되지 않습니다./);
+		expect(popover).toBeInTheDocument();
+
+		// mouseout을 하면 popover가 사라짐.
+		await user.unhover(termsAndConditions);
+		const nullPopoverAgain =
+			screen.queryByText(/아이스크림이 배달되지 않습니다./);
+		expect(nullPopoverAgain).not.toBeInTheDocument();
+	});
+});
