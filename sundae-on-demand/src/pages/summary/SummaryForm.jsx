@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Options from "../entry/Options";
 
 export default function SummaryForm() {
 	const [checked, setChecked] = useState(false);
@@ -27,6 +28,7 @@ export default function SummaryForm() {
 
 	return (
 		<Form>
+			<Options />
 			<Form.Group controlId="terms-and-conditions">
 				<Form.Check
 					type="checkbox"

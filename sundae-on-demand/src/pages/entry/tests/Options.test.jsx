@@ -2,11 +2,11 @@ import { render, screen } from "@testing-library/react";
 
 import Options from "../Options";
 
-test("서버에서 스쿱 옵션들의 이미지를 가져와 표시한다.", () => {
+test("서버에서 스쿱 옵션들의 이미지를 가져와 표시한다.", async () => {
 	render(<Options optionType="scoops" />);
 
 	// 이미지 찾기
-	const scoopImages = screen.getAllByRole("img", { name: /scoop$/i });
+	const scoopImages = await screen.findAllByRole("img", { name: /scoop$/i });
 	expect(scoopImages).toHaveLength(2);
 
 	// 이미지의 대체 텍스트를 확인한다.
