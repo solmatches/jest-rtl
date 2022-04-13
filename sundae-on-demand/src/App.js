@@ -1,9 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
-import SummaryForm from "./pages/summary/SummaryForm";
+import OrderEntry from "./pages/entry/OrderEntry";
 
 function App() {
-	return <SummaryForm />;
+	return <OrderEntry />;
 }
 
 export default App;
