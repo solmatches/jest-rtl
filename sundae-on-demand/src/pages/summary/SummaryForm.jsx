@@ -28,7 +28,6 @@ export default function SummaryForm() {
 
 	return (
 		<Form>
-			<Options />
 			<Form.Group controlId="terms-and-conditions">
 				<Form.Check
 					type="checkbox"
