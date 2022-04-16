@@ -1,9 +1,10 @@
 import { render, screen } from "@testing-library/react";
+import { OrderDetailsProvider } from "../../../contexts/OrderDetail";
 
 import Options from "../Options";
 
 test("서버에서 스쿱 옵션들의 이미지를 가져와 표시한다.", async () => {
-	render(<Options optionType="scoops" />);
+	render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
 
 	// 이미지 찾기
 	const scoopImages = await screen.findAllByRole("img", { name: /scoop$/i });
@@ -15,7 +16,9 @@ test("서버에서 스쿱 옵션들의 이미지를 가져와 표시한다.", as
 });
 
 test("서버에서 토핑 옵션들의 이미지를 가져와 표시한다.", async () => {
-	render(<Options optionType="toppings" />);
+	render(<Options optionType="toppings" />, {
+		wrapper: OrderDetailsProvider,
+	});
 
 	const toggingImages = await screen.findAllByRole("img", {
 		name: /topping$/i,
