@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
+import { pricePerItem } from "../../constants";
+import { useOrderDetails } from "../../contexts/OrderDetail";
 import AlertBanner from "../common/AlertBanner";
 import ScoopOption from "./ScoopOption";
 import ToppingOption from "./ToppingOption";
@@ -8,6 +10,7 @@ import ToppingOption from "./ToppingOption";
 export default function Options({ optionType }) {
 	const [items, setItems] = useState([]);
 	const [error, setError] = useState(false);
+	const [orderDetails, updateItemCount] = useOrderDetails();
 
 	useEffect(() => {
 		axios
@@ -25,14 +28,28 @@ export default function Options({ optionType }) {
 	}
 
 	const ItemComponent = optionType === "scoops" ? ScoopOption : ToppingOption;
+	const title =
+		optionType[0].toUpperCase() + optionType.slice(1).toLowerCase();
 
 	const optionItems = items.map((item) => (
 		<ItemComponent
 			key={item.name}
 			name={item.name}
 			imagePath={item.imagePath}
+			updateItemCount={(itemName, newItemCount) =>
+				updateItemCount(itemName, newItemCount, optionType)
+			}
 		/>
 	));
 
-	return <Row>{optionItems}</Row>;
+	return (
+		<>
+			<h2>{title}</h2>
+			<p>각 {pricePerItem[optionType]}원</p>
+			<p>
+				{title} 합계: {orderDetails.totals[optionType]}
+			</p>
+			<Row>{optionItems}</Row>
+		</>
+	);
 }
