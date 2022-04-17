@@ -24,6 +24,7 @@ describe("스쿱의 input 개수가 변하면 스쿱의 합계를 업데이트�
 		});
 		const user = userEvent.setup();
 		const vanillaInput = await screen.findByRole("spinbutton", {
+			// option을 렌더하기전에 서버에서 데이터를 받은 후 렌더하기 때문에 비동기로 처리해야함으로 `find`를 사용
 			name: "Vanilla",
 		});
 
