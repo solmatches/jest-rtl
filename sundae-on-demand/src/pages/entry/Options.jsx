@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
 import { pricePerItem } from "../../constants";
 import { useOrderDetails } from "../../contexts/OrderDetail";
+import { formatCurrency } from "../../utils";
 import AlertBanner from "../common/AlertBanner";
 import ScoopOption from "./ScoopOption";
 import ToppingOption from "./ToppingOption";
@@ -45,7 +46,7 @@ export default function Options({ optionType }) {
 	return (
 		<>
 			<h2>{title}</h2>
-			<p>각 {pricePerItem[optionType]}원</p>
+			<p>각 {formatCurrency(pricePerItem[optionType])}원</p>
 			<p>
 				{title} 합계: {orderDetails.totals[optionType]}
 			</p>
