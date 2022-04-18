@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { pricePerItem } from "../constants";
 
+const zeroCurrency = formatCurrency(0);
+
 function formatCurrency(amount) {
 	return `${new Intl.NumberFormat().format(amount)}원`;
 }
@@ -30,7 +32,7 @@ export function OrderDetailsProvider(props) {
 		scoops: [],
 		toppings: [],
 	});
-	const zeroCurrency = formatCurrency(0);
+
 	const [totals, setTotals] = useState({
 		scoops: zeroCurrency,
 		toppings: zeroCurrency,
