@@ -56,6 +56,36 @@ describe("스쿱의 input 개수가 변하면 스쿱의 합계를 업데이트�
 });
 
 // 토핑을 선택하면 토핑의 합계를 업데이트한다.
-// 토핑은 체크박스이다.
-// 선택한 토핑에 체크를하면 1개를 추가하고 토핑 합계를 업데이트한다.
-// 선택한 토핑에 체크를 해제하면 0개가 되고 토핑 합계를 업데이트한다.
+describe("토핑을 선택하면 토핑의 합계를 업데이트한다.", () => {
+	test("처음에는 토핑 선택은 되어있지 않고 토핑 합계는 0원이다.", async () => {
+		render(<Options optionType="toppings" />);
+
+		const checkbox = await screen.findByRole("checkbox");
+		expect(checkbox).not.toBeChecked();
+
+		const toppingsSubTotal = screen.getByText("Toppings 합계:", {
+			exact: false,
+		});
+		expect(toppingsSubTotal).toHaveTextContent("0원");
+	});
+
+	test("M&Ms를 체크하면 1개만큼 토핑 합계를 업데이트한다.", async () => {
+		render(<Options optionType="toppings" />);
+
+		const checkbox = await screen.findAllByRole("checkbox");
+		const mAndmsLabel = screen.getByText("M&Ms");
+		const user = userEvent.setup();
+
+		await user.click(mAndmsLabel);
+		expect(checkbox[0]).toBeChecked();
+
+		const toppingsSubTotal = screen.getByText("Toppings 합계:", {
+			exact: false,
+		});
+		expect(toppingsSubTotal).toHaveTextContent("1,500원");
+
+		await user.click(mAndmsLabel);
+		expect(checkbox).not.toBeChecked();
+		expect(toppingsSubTotal).toHaveTextContent("0원");
+	});
+});
