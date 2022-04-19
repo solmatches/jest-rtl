@@ -60,8 +60,8 @@ describe("토핑을 선택하면 토핑의 합계를 업데이트한다.", () =>
 	test("처음에는 토핑 선택은 되어있지 않고 토핑 합계는 0원이다.", async () => {
 		render(<Options optionType="toppings" />);
 
-		const checkbox = await screen.findByRole("checkbox");
-		expect(checkbox).not.toBeChecked();
+		const checkbox = await screen.findAllByRole("checkbox");
+		expect(checkbox[0]).not.toBeChecked();
 
 		const toppingsSubTotal = screen.getByText("Toppings 합계:", {
 			exact: false,
@@ -77,7 +77,7 @@ describe("토핑을 선택하면 토핑의 합계를 업데이트한다.", () =>
 		const user = userEvent.setup();
 
 		await user.click(mAndmsLabel);
-		expect(checkbox[0]).toBeChecked();
+		expect(checkbox[1]).toBeChecked();
 
 		const toppingsSubTotal = screen.getByText("Toppings 합계:", {
 			exact: false,
@@ -85,7 +85,7 @@ describe("토핑을 선택하면 토핑의 합계를 업데이트한다.", () =>
 		expect(toppingsSubTotal).toHaveTextContent("1,500원");
 
 		await user.click(mAndmsLabel);
-		expect(checkbox).not.toBeChecked();
+		expect(checkbox[1]).not.toBeChecked();
 		expect(toppingsSubTotal).toHaveTextContent("0원");
 	});
 });
