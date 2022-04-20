@@ -55,7 +55,6 @@ describe("스쿱의 input 개수가 변하면 스쿱의 합계를 업데이트�
 	});
 });
 
-// 토핑을 선택하면 토핑의 합계를 업데이트한다.
 describe("토핑을 선택하면 토핑의 합계를 업데이트한다.", () => {
 	test("처음에는 토핑 선택은 되어있지 않고 토핑 합계는 0원이다.", async () => {
 		render(<Options optionType="toppings" />);
@@ -87,5 +86,23 @@ describe("토핑을 선택하면 토핑의 합계를 업데이트한다.", () =>
 		await user.click(mAndmsLabel);
 		expect(checkbox[1]).not.toBeChecked();
 		expect(toppingsSubTotal).toHaveTextContent("0원");
+	});
+
+	test("Cherries를 체크하면 1개만큼 토핑 합계를 업데이트한다.", async () => {
+		render(<Options optionType="toppings" />);
+
+		const user = userEvent.setup();
+		const toppingsSubTotal = screen.getByText("Toppings 합계:", {
+			exact: false,
+		});
+		expect(toppingsSubTotal).toHaveTextContent("0원");
+
+		const cherriesCheckbox = await screen.findByRole("checkbox", {
+			name: "Cherries",
+		});
+
+		await user.click(cherriesCheckbox);
+		expect(cherriesCheckbox).toBeChecked();
+		expect(toppingsSubTotal).toHaveTextContent("1,500원");
 	});
 });

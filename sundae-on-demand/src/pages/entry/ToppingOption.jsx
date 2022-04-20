@@ -6,7 +6,6 @@ export default function ToppingOption({ name, imagePath, updateItemCount }) {
 	const [checked, setChecked] = useState(false);
 
 	const handleChecked = (event) => {
-		console.log(event.target.checked);
 		const { checked: targetChecked } = event.target;
 		setChecked(targetChecked);
 		updateItemCount(name, targetChecked ? 1 : 0);
