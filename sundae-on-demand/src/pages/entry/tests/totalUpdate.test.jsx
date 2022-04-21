@@ -1,6 +1,7 @@
 import { render, screen } from "../../../test-utils/testing-library-utils";
 import userEvent from "@testing-library/user-event";
 import Options from "../Options";
+import OrderEntry from "../OrderEntry";
 
 // 스쿱이 변하면 스쿱의 합계를 업데이트 한다.
 describe("스쿱의 input 개수가 변하면 스쿱의 합계를 업데이트한다.", () => {
@@ -104,5 +105,72 @@ describe("토핑을 선택하면 토핑의 합계를 업데이트한다.", () =>
 		await user.click(cherriesCheckbox);
 		expect(cherriesCheckbox).toBeChecked();
 		expect(toppingsSubTotal).toHaveTextContent("1,500원");
+	});
+});
+
+describe("총 합계", () => {
+	test("처음 총 합계는 0원이다", () => {
+		render(<OrderEntry />);
+
+		const grandTotal = screen.getByText("총 합계", { exact: false });
+		expect(grandTotal).toHaveTextContent("0원");
+	});
+
+	test("처음으로 추가된 속성이 scoop이면 총 합계를 업데이트한다.", async () => {
+		render(<OrderEntry />);
+
+		const user = userEvent.setup();
+		const grandTotal = screen.getByText("총 합계", { exact: false });
+		const vanillaScoop = await screen.findByRole("spinbutton", {
+			name: "Vanilla",
+		});
+
+		await user.clear(vanillaScoop);
+		await user.type(vanillaScoop, "1");
+
+		expect(vanillaScoop).toHaveValue(1);
+		expect(grandTotal).toHaveTextContent("2,000원");
+	});
+	test("처음으로 추가된 속성이 topping이면 총 합계를 업데이트한다.", async () => {
+		render(<OrderEntry />);
+
+		const user = userEvent.setup();
+		const grandTotal = screen.getByText("총 합계", { exact: false });
+		const cherriesTopping = await screen.findByRole("checkbox", {
+			name: "Cherries",
+		});
+
+		await user.click(cherriesTopping);
+
+		expect(cherriesTopping).toBeChecked();
+		expect(grandTotal).toHaveTextContent("1,500원");
+	});
+	test("아이템이 제거되면 총 합계를 업데이트한다.", async () => {
+		render(<OrderEntry />);
+
+		const user = userEvent.setup();
+
+		const grandTotal = screen.getByText("총 합계", { exact: false });
+		const vanillaScoop = await screen.findByRole("spinbutton", {
+			name: "Vanilla",
+		});
+		const cherriesTopping = await screen.findByRole("checkbox", {
+			name: "Cherries",
+		});
+
+		await user.type(vanillaScoop, "1");
+		await user.click(cherriesTopping);
+
+		expect(vanillaScoop).toHaveValue(1);
+		expect(cherriesTopping).toBeChecked();
+		expect(grandTotal).toHaveTextContent("3,500원");
+
+		await user.clear(vanillaScoop);
+		await user.type(vanillaScoop, "0");
+		await user.click(cherriesTopping);
+
+		expect(cherriesTopping).not.toBeChecked();
+		expect(vanillaScoop).toHaveValue(0);
+		expect(grandTotal).toHaveTextContent("0원");
 	});
 });

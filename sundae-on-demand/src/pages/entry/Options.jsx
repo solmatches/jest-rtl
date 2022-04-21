@@ -46,7 +46,7 @@ export default function Options({ optionType }) {
 	return (
 		<>
 			<h2>{title}</h2>
-			<p>각 {formatCurrency(pricePerItem[optionType])}원</p>
+			<p>각 {formatCurrency(pricePerItem[optionType])}</p>
 			<p>
 				{title} 합계: {orderDetails.totals[optionType]}
 			</p>
