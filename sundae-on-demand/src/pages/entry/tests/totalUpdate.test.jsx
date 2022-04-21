@@ -126,10 +126,10 @@ describe("총 합계", () => {
 		});
 
 		await user.clear(vanillaScoop);
-		await user.type(vanillaScoop, "1");
+		await user.type(vanillaScoop, "2");
 
-		expect(vanillaScoop).toHaveValue(1);
-		expect(grandTotal).toHaveTextContent("2,000원");
+		expect(vanillaScoop).toHaveValue(2);
+		expect(grandTotal).toHaveTextContent("4,000원");
 	});
 	test("처음으로 추가된 속성이 topping이면 총 합계를 업데이트한다.", async () => {
 		render(<OrderEntry />);
@@ -158,19 +158,22 @@ describe("총 합계", () => {
 			name: "Cherries",
 		});
 
-		await user.type(vanillaScoop, "1");
+		await user.clear(vanillaScoop);
+		await user.type(vanillaScoop, "2");
 		await user.click(cherriesTopping);
 
-		expect(vanillaScoop).toHaveValue(1);
+		expect(vanillaScoop).toHaveValue(2);
 		expect(cherriesTopping).toBeChecked();
-		expect(grandTotal).toHaveTextContent("3,500원");
+		expect(grandTotal).toHaveTextContent("5,500원");
 
 		await user.clear(vanillaScoop);
-		await user.type(vanillaScoop, "0");
+		await user.type(vanillaScoop, "1");
+		expect(vanillaScoop).toHaveValue(1);
+		expect(grandTotal).toHaveTextContent("3,500원");
+
 		await user.click(cherriesTopping);
 
 		expect(cherriesTopping).not.toBeChecked();
-		expect(vanillaScoop).toHaveValue(0);
-		expect(grandTotal).toHaveTextContent("0원");
+		expect(grandTotal).toHaveTextContent("2,000원");
 	});
 });
