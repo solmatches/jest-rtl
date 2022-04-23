@@ -3,7 +3,6 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Options from "../entry/Options";
 
 export default function SummaryForm() {
 	const [checked, setChecked] = useState(false);
@@ -16,13 +15,13 @@ export default function SummaryForm() {
 
 	const checkboxLabel = (
 		<span>
-			I agree to
 			<OverlayTrigger
 				trigger={["hover", "focus"]}
 				placement="right"
 				overlay={popover}>
-				<span style={{ color: "blue" }}>Terms and Conditions</span>
+				<span style={{ color: "blue" }}>이용약관</span>
 			</OverlayTrigger>
+			에 동의합니다
 		</span>
 	);
 
@@ -37,7 +36,7 @@ export default function SummaryForm() {
 				/>
 			</Form.Group>
 			<Button variant="primary" type="submit" disabled={!checked}>
-				Confirm order
+				주문 확인
 			</Button>
 		</Form>
 	);
