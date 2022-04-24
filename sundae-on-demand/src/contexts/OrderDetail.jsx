@@ -24,11 +24,15 @@ function calculateSubtotal(optionType, optionCounts) {
 	return optionCount * pricePerItem[optionType];
 }
 
-export function OrderDetailsProvider(props) {
-	const [optionCounts, setOptionCounts] = useState({
+function initialOptionCounts() {
+	return {
 		scoops: [],
 		toppings: [],
-	});
+	};
+}
+
+export function OrderDetailsProvider(props) {
+	const [optionCounts, setOptionCounts] = useState(initialOptionCounts);
 
 	const [totals, setTotals] = useState({
 		scoops: zeroCurrency,
@@ -58,7 +62,12 @@ export function OrderDetailsProvider(props) {
 				},
 			}));
 		}
-		return [{ ...optionCounts, totals }, updateItemCount];
+
+		function resetOrder() {
+			setOptionCounts(initialOptionCounts);
+		}
+
+		return [{ ...optionCounts, totals }, updateItemCount, resetOrder];
 	}, [optionCounts, totals]);
 
 	return <OrderDetails.Provider value={value} {...props} />;

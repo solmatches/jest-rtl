@@ -56,7 +56,7 @@ test("올바른 주문 단계", async () => {
 	// 확인 페이지에서 주문번호 확인
 	// 서버에 주문 내역 저장이 완료된 후 나타나는 페이지 이므로 비동기 처리 필요
 	const thankYouHeader = await screen.findByRole("header", {
-		name: "감사합니다",
+		name: "감사합니다!",
 	});
 	expect(thankYouHeader).toBeInTheDocument();
 

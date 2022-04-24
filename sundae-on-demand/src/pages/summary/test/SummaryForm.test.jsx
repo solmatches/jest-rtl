@@ -7,7 +7,7 @@ describe("Summary Form", () => {
 		render(<SummaryForm />);
 
 		const checkbox = screen.getByRole("checkbox", {
-			name: "I agree to Terms and Conditions",
+			name: "이용약관",
 		});
 
 		expect(checkbox).not.toBeChecked();
