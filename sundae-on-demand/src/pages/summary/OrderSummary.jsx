@@ -4,15 +4,14 @@ import SummaryForm from "./SummaryForm";
 export default function OrderSummary({ setOrderPhase }) {
 	const [orderDetails] = useOrderDetails();
 
-    // FIX: orderDetails.scoops.entries()
-	const scoopArray = Array.from(orderDetails.scoops.entries());
+	const scoopArray = Object.entries(orderDetails.scoops);
 	const scoopList = scoopArray.map(([key, value]) => (
 		<li key={key}>
-			{value} {key}
+			{key} {value}
 		</li>
 	));
 
-	const toppingArray = Array.from(orderDetails.toppings.keys());
+	const toppingArray = Object.keys(orderDetails.toppings);
 	const toppingList = toppingArray.map((key) => <li key={key}>{key}</li>);
 
 	return (
