@@ -15,7 +15,7 @@ export default function SummaryForm({ setOrderPhase }) {
 
 	const popover = (
 		<Popover id="popover-basic">
-			<Popover.Body>아이스크림이 배달되지 않습니다.</Popover.Body>
+			<Popover.Body>아이스크림이 전달되지 않습니다.</Popover.Body>
 		</Popover>
 	);
 

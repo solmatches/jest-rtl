@@ -88,3 +88,20 @@ test("올바른 주문 단계", async () => {
 	await screen.findByRole("spinbutton", { name: "Vanilla" });
 	await screen.findByRole("checkbox", { name: "Cherries" });
 });
+
+test("토핑을 선택하지 않은 경우", () => {
+	render(<App />);
+
+	// 토핑을 주문하지 않은 경우 orderSummary 페이지에서 토핑을 제거한다.
+	// 아이스크림 스쿱 선택
+	// 주문하기 클릭
+	// 토핑이 표시되지 않은 주문 요약 확인
+	// 이용약관에 동의하고 주문 확인 버튼 클릭
+	// 로딩 표시
+	// 주문 완료 페이지 나타남
+	// 로딩 표시 제거
+	// 주문 번호 확인
+	// 제주문 버튼 클릭
+	// 주문 페이지가 초기화 되었는지 확인
+	// 메뉴들이 잘 불러와졌는지 확인.
+});
