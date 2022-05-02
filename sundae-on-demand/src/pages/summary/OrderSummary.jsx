@@ -7,7 +7,7 @@ export default function OrderSummary({ setOrderPhase }) {
 	const scoopArray = Object.entries(orderDetails.scoops);
 	const scoopList = scoopArray.map(([key, value]) => (
 		<li key={key}>
-			{key} {value}
+			{key} {value}개
 		</li>
 	));
 
@@ -19,8 +19,12 @@ export default function OrderSummary({ setOrderPhase }) {
 			<h1>주문내역</h1>
 			<h2>Scoops: {orderDetails.totals.scoops}</h2>
 			<ul>{scoopList}</ul>
-			<h2>Toppings: {orderDetails.totals.toppings}</h2>
-			<ul>{toppingList}</ul>
+			{scoopArray.length && (
+				<>
+					<h2>Toppings: {orderDetails.totals.toppings}</h2>
+					<ul>{toppingList}</ul>
+				</>
+			)}
 			<SummaryForm setOrderPhase={setOrderPhase} />
 		</div>
 	);
