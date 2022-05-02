@@ -26,8 +26,8 @@ function calculateSubtotal(optionType, optionCounts) {
 
 function initialOptionCounts() {
 	return {
-		scoops: [],
-		toppings: [],
+		scoops: {},
+		toppings: {},
 	};
 }
 
