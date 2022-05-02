@@ -20,7 +20,7 @@ export const handlers = [
 		);
 	}),
 
-	rest.get("http://localhost:3030/order", (req, res, ctx) => {
+	rest.post("http://localhost:3030/order", (req, res, ctx) => {
 		return res(ctx.json({ orderNumber: 123456789 }));
 	}),
 ];
