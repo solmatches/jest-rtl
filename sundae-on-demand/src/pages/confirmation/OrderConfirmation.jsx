@@ -18,6 +18,7 @@ export default function OrderConfirmation({ setOrderPhase }) {
 			.post(`http://localhost:3030/order`)
 			.then((response) => {
 				const { orderNumber } = response.data;
+
 				if (orderNumber) {
 					setOrderNumber(orderNumber);
 				}
@@ -32,7 +33,7 @@ export default function OrderConfirmation({ setOrderPhase }) {
 		return (
 			<div style={{ textAlign: "center" }}>
 				<h1>감사합니다!</h1>
-				<p>주문번호는 {{ orderNumber }} 입니다.</p>
+				<p>주문번호는 {orderNumber} 입니다.</p>
 				<p style={{ fontSize: "25%" }}>
 					이용 약관에따라 아무일도 일어나지 않을 것입니다.
 				</p>
